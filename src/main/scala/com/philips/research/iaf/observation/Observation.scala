@@ -1,5 +1,7 @@
 package com.philips.research.iaf.observation
 
+import cats.Monad
+
 object Observation{
 
   /**
@@ -10,6 +12,8 @@ object Observation{
     */
   def pure[A](x: A): Observation[A] = new Observation[A](x)
 
+  import com.philips.research.iaf.observation.ObservationInstances._
+  Monad[Observation]
 }
 
 /**
@@ -70,7 +74,6 @@ final case class Observation[A](value: A){
     */
   override def toString: String = s"Observation($value)"
 }
-
 
 
 
