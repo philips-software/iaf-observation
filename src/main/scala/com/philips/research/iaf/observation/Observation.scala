@@ -1,7 +1,5 @@
 package com.philips.research.iaf.observation
 
-import cats.Monad
-
 object Observation{
 
   /**
@@ -11,9 +9,6 @@ object Observation{
     * @return
     */
   def pure[A](x: A): Observation[A] = new Observation[A](x)
-
-  import com.philips.research.iaf.observation.ObservationInstances._
-  Monad[Observation]
 }
 
 /**
