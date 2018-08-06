@@ -67,29 +67,29 @@ object ObservationT extends ObservationTInstances {
 }
 
 /**
-  * Provides the ObservationT type class instance of Cats' Monad type class (i.e. Monad[ObservationT[F, ?]]).
+  * Provides the ObservationT type class instance of Cats' Monad type class (i.e. Monad[ObservationT[F, A]\]).
   */
-private trait ObservationTInstances{
+trait ObservationTInstances{
 
-  implicit def catsMonadForObservationT[F[_], A](implicit F0: Monad[F[Observation[A]]]): Monad[ObservationT[F, A]] = {
-    new ObservationTMonad
+  implicit def catsMonadForObservationT[F[_], A](implicit F0: Monad[F]): ObservationTMonad[F] = {
+    new ObservationTMonad[F] {
+      override val F = F0
+    }
   }
 }
 
 /**
-  * Implementation of Monad[ObservationT[F, ?]] for any outer Monad F.
+  * Implementation of Monad[ObservationT[F, A]\] for any outer Monad F.
   * @tparam F The outer Monad F.
   */
-private trait ObservationTMonad[F[_]] extends Monad[ObservationT[F, ?]]{
+trait ObservationTMonad[F[_]] extends Monad[ObservationT[F, ?]]{
 
-  implicit def F: Monad[F]
+  implicit def F = Monad[F]
 
   override def pure[A](x: A): ObservationT[F, A] = ObservationT.pure(x)
 
-  override def flatMap[A, B](fa: ObservationT[F, A])(f: A => ObservationT[F, _][B]): ObservationT[F, _][B] = ???
+  override def flatMap[A, B](fa: ObservationT[F, A])(f: A => ObservationT[F, B]): ObservationT[F, B] = fa.flatMap(f)
 
-  override def tailRecM[A, B](a: A)(f: A => ObservationT[F, _][Either[A, B]]): ObservationT[F, _][B] = ???
-
-
+  override def tailRecM[A, B](a: A)(f: A => ObservationT[F, Either[A, B]]): ObservationT[F, B] = ???
 }
 
