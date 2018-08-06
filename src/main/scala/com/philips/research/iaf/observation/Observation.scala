@@ -14,16 +14,6 @@ final case class Observation[A](value: A){
   import Observation._
 
   /**
-    * Applies the function f: A => Observation[B] to the value of the Observation[A], yielding Observation[B].
-    * @param f
-    * @tparam B
-    * @return
-    */
-  def flatMap[B](f: A => Observation[B]): Observation[B] ={
-    f(value)
-  }
-
-  /**
     * Applies function f: A => B to the value of the Observation[A], yielding Observation[B].
     * @param f
     * @tparam B
@@ -31,6 +21,16 @@ final case class Observation[A](value: A){
     */
   def map[B](f: A => B): Observation[B] ={
     pure(f(value))
+  }
+
+  /**
+    * Applies the function f: A => Observation[B] to the value of the Observation[A], yielding Observation[B].
+    * @param f
+    * @tparam B
+    * @return
+    */
+  def flatMap[B](f: A => Observation[B]): Observation[B] ={
+    f(value)
   }
 
   /**
