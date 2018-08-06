@@ -75,7 +75,7 @@ object Observation extends ObservationInstances {
 }
 
 /**
-  * Provides the implementation of Cats' Monad type class Monad[Observation].
+  * Provides the observation type class instance of Cats' Monad type class (i.e. Monad[Observation]).
   */
 trait ObservationInstances{
 

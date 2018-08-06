@@ -3,7 +3,7 @@ package com.philips.research.iaf.observation
 import cats.kernel.Eq
 import cats.laws.discipline.MonadTests
 import cats.tests.CatsSuite
-import org.scalacheck.{Arbitrary, Gen}
+import org.scalacheck.Arbitrary
 
 class CatsMonadForObservationSpec extends CatsSuite {
 
