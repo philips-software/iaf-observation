@@ -1,15 +1,8 @@
 package com.philips.research.iaf.observation
 
-object Observation{
+import cats.Monad
 
-  /**
-    * Wraps a value into an Observation.
-    * @param x
-    * @tparam A
-    * @return
-    */
-  def pure[A](x: A): Observation[A] = new Observation[A](x)
-}
+import scala.annotation.tailrec
 
 /**
   * The observation monad allows for the functional composition and transformation of data points of various data types in a type-safe manner.
@@ -70,7 +63,33 @@ final case class Observation[A](value: A){
   override def toString: String = s"Observation($value)"
 }
 
+object Observation extends ObservationInstances {
 
+  /**
+    * Wraps a value into an Observation.
+    * @param x
+    * @tparam A
+    * @return
+    */
+  def pure[A](x: A): Observation[A] = new Observation[A](x)
+}
 
+/**
+  * Provides the implementation of Cats' Monad type class Monad[Observation].
+  */
+trait ObservationInstances{
 
+  implicit val catsMonadForObservation: Monad[Observation] = new Monad[Observation] {
+
+    override def pure[A](x: A): Observation[A] = Observation.pure(x)
+
+    override def flatMap[A, B](fa: Observation[A])(f: A => Observation[B]): Observation[B] = fa.flatMap(f)
+
+    @tailrec
+    override def tailRecM[A, B](a: A)(f: A => Observation[Either[A, B]]): Observation[B] = f(a) match{
+      case Observation(Right(b)) => pure(b)
+      case Observation(Left(a2)) => tailRecM(a2)(f)
+    }
+  }
+}
 

@@ -6,8 +6,6 @@ import com.philips.research.iaf.observation.Observation
 
 object CatsObservationMonad extends App{
 
-  import com.philips.research.iaf.observation.ObservationInstances._
-
   //Example 1: Creating an Observation from Cats' Monad type class
   val o = Monad[Observation].pure(5)
   println(s"Created observation $o")
