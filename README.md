@@ -62,7 +62,7 @@ To run the test suite, execute `sbt test` in the root project directory. This wi
 
 ## Known issues
 
-- We would like to further integrate with the Cats framework, by making `Observation` and `ObservationT` a type class of Cats' Monad trait.
+- We would like to further integrate with the Cats framework, by making both `Observation` and `ObservationT` a type class instance of Cats' Monad type class.
 
 ## Contact / Getting help
 
