@@ -5,7 +5,7 @@ import com.philips.research.iaf.observation.{Observation, ObservationT}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
-import scala.util.Success
+import scala.util.{Failure, Success}
 
 object TransformingObservations extends App{
 
@@ -18,7 +18,10 @@ object TransformingObservations extends App{
   val futureIntObservation = futureStringObservation.map(_.length)
 
   //Print the result of the future on completion
-  futureIntObservation.value.onComplete{case Success(o) => println(s"The future observation completed with result: $o")}
+  futureIntObservation.value.onComplete{
+    case Success(o) => println(s"The future observation completed with result: $o")
+    case Failure(_) => println("This never happens.")
+  }
 
   //Example 2
 
