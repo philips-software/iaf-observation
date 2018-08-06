@@ -9,7 +9,8 @@ lazy val root = (project in file(".")).
     name := "IAF-Observation",
     libraryDependencies ++= Seq(
       "org.scalatest" %% "scalatest" % "3.0.5" % "test",
-      "org.typelevel" %% "cats-core" % "1.0.1"
+      "org.typelevel" %% "cats-core" % "1.0.1",
+      "org.typelevel" %% "cats-testkit" % "1.0.1"
     ),
     //Cats relies on improved type inference via the fix for SI-2712, which is not enabled by default.
     scalacOptions += "-Ypartial-unification"
