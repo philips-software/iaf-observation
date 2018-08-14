@@ -72,9 +72,7 @@ object ObservationT extends ObservationTInstances {
 trait ObservationTInstances{
 
   implicit def catsMonadForObservationT[F[_], A](implicit F0: Monad[F]): ObservationTMonad[F] = {
-    new ObservationTMonad[F] {
-      override val F = F0
-    }
+    new ObservationTMonad[F] {override implicit def F: Monad[F] = F0}
   }
 }
 
@@ -84,7 +82,7 @@ trait ObservationTInstances{
   */
 trait ObservationTMonad[F[_]] extends Monad[ObservationT[F, ?]]{
 
-  implicit def F = Monad[F]
+  implicit def F: Monad[F]
 
   override def pure[A](x: A): ObservationT[F, A] = ObservationT.pure(x)
 
