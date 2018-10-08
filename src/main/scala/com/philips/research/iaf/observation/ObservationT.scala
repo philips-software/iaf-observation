@@ -72,7 +72,9 @@ object ObservationT extends ObservationTInstances {
 trait ObservationTInstances{
 
   implicit def catsMonadForObservationT[F[_], A](implicit F0: Monad[F]): ObservationTMonad[F] = {
-    new ObservationTMonad[F] {override implicit def F: Monad[F] = F0}
+    new ObservationTMonad[F] {
+      override implicit def mon: Monad[F] = F0
+    }
   }
 }
 
@@ -82,12 +84,23 @@ trait ObservationTInstances{
   */
 trait ObservationTMonad[F[_]] extends Monad[ObservationT[F, ?]]{
 
-  implicit def F: Monad[F]
+  implicit def mon: Monad[F]
 
   override def pure[A](x: A): ObservationT[F, A] = ObservationT.pure(x)
 
   override def flatMap[A, B](fa: ObservationT[F, A])(f: A => ObservationT[F, B]): ObservationT[F, B] = fa.flatMap(f)
 
-  override def tailRecM[A, B](a: A)(f: A => ObservationT[F, Either[A, B]]): ObservationT[F, B] = ???
+  override def map[A, B](fa: ObservationT[F, A])(f: A => B): ObservationT[F, B] = fa.map(f)
+
+  override def tailRecM[A, B](a: A)(f: A => ObservationT[F, Either[A, B]]): ObservationT[F, B] = {
+
+    ObservationT(
+      mon.tailRecM(a)(a0 => mon.map(f(a0).value) {
+        case Observation(Left(a2)) => Left[A, Observation[B]](a2)
+        case Observation(Right(b)) => Right[A, Observation[B]](Observation(b))
+      }
+      )
+    )
+  }
 }
 
