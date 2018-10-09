@@ -1,9 +1,9 @@
 package com.philips.research.iaf.observation
 
 import org.scalatest.FlatSpec
-import org.scalatest.Matchers._
+import org.scalatest.Matchers
 
-class ObservationSpec extends FlatSpec {
+class ObservationSpec extends FlatSpec with Matchers {
 
   import Observation._
 
