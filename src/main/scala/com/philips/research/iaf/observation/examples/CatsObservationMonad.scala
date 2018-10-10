@@ -7,11 +7,11 @@ import com.philips.research.iaf.observation.Observation
 object CatsObservationMonad extends App{
 
   //Example 1: Creating an Observation from Cats' Monad type class
-  val o = Monad[Observation].pure(5)
-  println(s"Created observation $o")
+  val o1 = Monad[Observation].pure(5)
+  println(s"Created observation $o1")
 
-  val o2 = Monad[Observation].map(o)(x => x * 2)
-  println(s"Transformed to observation $o2")
+  val o2 = Monad[Observation].map(o1)(x => x * 2)
+  println(s"Mapped to observation $o2")
 
   //Example 2: Using the observation monad in Cats' Option transformer
   val observationOption = OptionT.pure[Observation](2)
