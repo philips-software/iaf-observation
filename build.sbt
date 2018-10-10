@@ -4,7 +4,7 @@ lazy val root = (project in file(".")).
     inThisBuild(List(
       organization := "com.philips.research.iaf.observation",
       scalaVersion := "2.12.6",
-      version      := "0.1.0-SNAPSHOT"
+      version      := "0.0.2-SNAPSHOT"
     )),
     name := "IAF-Observation",
     addCompilerPlugin("org.spire-math" %% "kind-projector" % "0.9.7"),
