@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/philips-software/iaf-observation.svg?token=sPT97aoNLmsMKsTV2VZW&branch=master)](https://travis-ci.com/philips-software/iaf-observation)
+[![Build Status](https://travis-ci.com/philips-software/iaf-observation.svg?branch=master)](https://travis-ci.com/philips-software/iaf-observation)
 
 The Observation Monad
 ======
@@ -62,7 +62,7 @@ To run the test suite, execute `sbt test` in the root project directory. This wi
 
 ## Known issues
 
-- We would like to further integrate with the Cats framework, by making `Observation` and `ObservationT` a type class of Cats' Monad trait.
+- We would like to further integrate with the Cats framework, by making both `Observation` and `ObservationT` a type class instance of Cats' Monad type class.
 
 ## Contact / Getting help
 
