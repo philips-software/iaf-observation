@@ -1,9 +1,9 @@
 Contributing
 ======
 
-Thank you for considering to contribute to this project. There are several ways to help, such as submitting bug reports and feature requests, providing use-case examples, or writing code which can further extend the capabilities of the observation monad.
+Thank you for considering to contribute. There are several ways to help, such as submitting bug reports and feature requests, providing use-case examples, or writing code which can further extend the capabilities of the observation monad.
 
-General questions and discussions can be posted in our [Gitter channel](TODOLINKHERE). Any security issues should be submitted directly to one of our official [maintainers](MAINTAINERS.md). 
+Security issues should be submitted directly to one of our official [maintainers](MAINTAINERS.md). 
 
 ## How to create a pull request
 
@@ -29,7 +29,7 @@ When filing an issue, make sure to answer these five questions:
 5. What did you see instead?
 
 ## How to suggest a feature or enhancement
-The observation monad provides a type-safe way of composing and transforming one or multiple data points in a functional manner. If you find there is some functionality missing in the observation monad, feel free to add an issue to our issue list on GitHub, describing:
+The observation monad allows for the functional composition and manipulation of data points of various data types in a type-safe manner. If you find there is some functionality missing, feel free to add an issue to our issue list on GitHub, describing:
 * Which feature you would like to see.
 * Why you need it.
 * How it should work.
