@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.com/philips-software/iaf-observation.svg?branch=master)](https://travis-ci.com/philips-software/iaf-observation)
 
+⚠️ This project is no longer supported.
+
 The Observation Monad
 ======
 
